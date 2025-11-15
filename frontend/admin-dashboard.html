@@ -304,7 +304,7 @@
     // Check admin authentication
     const adminToken = localStorage.getItem('adminAuth');
     if (!adminToken) {
-      window.location.href = 'admin.html';
+      window.location.href = '/';
     }
 
     let clinicsData = [];
@@ -450,7 +450,7 @@
     // Logout
     document.getElementById('adminLogout').addEventListener('click', () => {
       localStorage.removeItem('adminAuth');
-      window.location.href = 'admin.html';
+      window.location.href = '/';
     });
 
     // Initial load

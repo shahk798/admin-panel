@@ -98,7 +98,7 @@
 
         if (res.ok) {
           localStorage.setItem('adminAuth', data.token);
-          window.location.href = 'admin-dashboard.html';
+          window.location.href = '/dashboard';
         } else {
           adminError.innerText = data.message || 'Invalid password';
         }
