@@ -10,8 +10,16 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Serve static files from frontend directory
-app.use('/frontend', express.static(path.join(__dirname, 'frontend')));
+// Serve static files from frontend directory with proper MIME types
+app.use('/frontend', express.static(path.join(__dirname, 'frontend'), {
+  setHeaders: (res, filepath) => {
+    if (filepath.endsWith('.css')) {
+      res.setHeader('Content-Type', 'text/css');
+    } else if (filepath.endsWith('.js')) {
+      res.setHeader('Content-Type', 'application/javascript');
+    }
+  }
+}));
 
 // MongoDB connection
 const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/clinic_crm';
@@ -44,3 +52,6 @@ const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`🚀 Admin Panel Server running on port ${PORT}`);
 });
+
+// Export for Vercel
+module.exports = app;
