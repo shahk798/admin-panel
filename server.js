@@ -21,6 +21,12 @@ app.use('/frontend', express.static(path.join(__dirname, 'frontend'), {
   }
 }));
 
+// Explicit route for style.css
+app.get('/frontend/style.css', (req, res) => {
+  res.setHeader('Content-Type', 'text/css');
+  res.sendFile(path.join(__dirname, 'frontend', 'style.css'));
+});
+
 // MongoDB connection
 const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/clinic_crm';
 
